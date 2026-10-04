@@ -41,5 +41,42 @@ function handleEnter(event) {
     }
 }
 
-taskInput.addEventListener("keydown", handleEnter);
 taskDate.addEventListener("keydown", handleEnter);
+
+function displayTasks() {
+    taskList.innerHTML = "";
+
+    for (const task of tasks) {
+        const listItem = document.createElement("li");
+
+        listItem.textContent = task.text + " - Due: " + task.date;
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+
+        removeButton.addEventListener("click", function() {
+            listItem.remove();
+        });
+
+        listItem.appendChild(removeButton);
+        taskList.appendChild(listItem);
+    }
+}
+
+sortSelect.addEventListener("change", function() {
+    const sortType = sortSelect.value;
+
+    if (sortType === "oldest") {
+        tasks.sort(function(a, b) {
+            return new Date(a.date) - new Date(b.date);
+        });
+    }
+
+    if (sortType === "newest") {
+        tasks.sort(function(a, b) {
+            return new Date(b.date) - new Date(a.date);
+        });
+    }
+
+    displayTasks();
+});
