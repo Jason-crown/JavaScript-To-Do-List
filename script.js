@@ -2,6 +2,9 @@ const taskInput = document.getElementById("taskInput");
 const taskDate = document.getElementById("taskDate");
 const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
+const sortSelect = document.getElementById("sortSelect");
+
+const tasks = [];
 
 function addTask() {
     const task = taskInput.value;
@@ -11,19 +14,14 @@ function addTask() {
         return;
     }
 
-    const listItem = document.createElement("li");
+    const newTask = {
+        text: task,
+        date: date
+    };
 
-    listItem.textContent = task + " - Due: " + date;
+    tasks.push(newTask);
 
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-
-    removeButton.addEventListener("click", function() {
-        listItem.remove();
-    });
-
-    listItem.appendChild(removeButton);
-    taskList.appendChild(listItem);
+    displayTasks();
 
     taskInput.value = "";
     taskDate.value = "";
