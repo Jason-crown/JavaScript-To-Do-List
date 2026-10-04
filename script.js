@@ -36,3 +36,12 @@ taskInput.addEventListener("keydown", function(event) {
         addTask();
     }
 });
+
+function handleEnter(event) {
+    if (event.key === "Enter") {
+        addTask();
+    }
+}
+
+taskInput.addEventListener("keydown", handleEnter);
+taskDate.addEventListener("keydown", handleEnter);
