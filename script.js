@@ -15,6 +15,7 @@ function addTask() {
     }
 
     const newTask = {
+        id: Date.now(),
         text: task,
         date: date
     };
@@ -26,22 +27,6 @@ function addTask() {
     taskInput.value = "";
     taskDate.value = "";
 }
-
-addButton.addEventListener("click", addTask);
-
-taskInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        addTask();
-    }
-});
-
-function handleEnter(event) {
-    if (event.key === "Enter") {
-        addTask();
-    }
-}
-
-taskDate.addEventListener("keydown", handleEnter);
 
 function displayTasks() {
     taskList.innerHTML = "";
@@ -55,7 +40,13 @@ function displayTasks() {
         removeButton.textContent = "Remove";
 
         removeButton.addEventListener("click", function() {
-            listItem.remove();
+            const index = tasks.findIndex(function(item) {
+                return item.id === task.id;
+            });
+
+            tasks.splice(index, 1);
+
+            displayTasks();
         });
 
         listItem.appendChild(removeButton);
@@ -80,3 +71,14 @@ sortSelect.addEventListener("change", function() {
 
     displayTasks();
 });
+
+function handleEnter(event) {
+    if (event.key === "Enter") {
+        addTask();
+    }
+}
+
+addButton.addEventListener("click", addTask);
+
+taskInput.addEventListener("keydown", handleEnter);
+taskDate.addEventListener("keydown", handleEnter);
