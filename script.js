@@ -3,19 +3,20 @@ const taskDate = document.getElementById("taskDate");
 const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
 const sortSelect = document.getElementById("sortSelect");
-const yearInput = document.getElementById("yearInput");
-const monthInput = document.getElementById("monthInput");
-const dayInput = document.getElementById("dayInput");
 
 const tasks = [];
 
 function addTask() {
     const task = taskInput.value;
-    const date = taskDate.value;
+    const year = yearInput.value;
+    const month = monthInput.value;
+    const day = dayInput.value;
 
-    if (task === "" || date === "") {
+    if (task === "" || year === "" || month === "" || day === "") {
         return;
     }
+
+    const date = year + "-" + month + "-" + day;
 
     const newTask = {
         id: Date.now(),
@@ -28,7 +29,9 @@ function addTask() {
     displayTasks();
 
     taskInput.value = "";
-    taskDate.value = "";
+    yearInput.value = "";
+    monthInput.value = "";
+    dayInput.value = "";
 }
 
 function displayTasks() {
@@ -78,14 +81,7 @@ sortSelect.addEventListener("change", function() {
 taskInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         event.preventDefault();
-        taskDate.focus();
-    }
-});
-
-taskDate.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        addTask();
+        yearInput.focus();
     }
 });
 
@@ -109,5 +105,3 @@ dayInput.addEventListener("keydown", function(event) {
         addTask();
     }
 });
-
-addButton.addEventListener("click", addTask);
