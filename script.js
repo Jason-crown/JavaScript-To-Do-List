@@ -72,13 +72,18 @@ sortSelect.addEventListener("change", function() {
     displayTasks();
 });
 
-function handleEnter(event) {
+taskInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
+        event.preventDefault();
+        taskDate.focus();
+    }
+});
+
+taskDate.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
         addTask();
     }
-}
+});
 
 addButton.addEventListener("click", addTask);
-
-taskInput.addEventListener("keydown", handleEnter);
-taskDate.addEventListener("keydown", handleEnter);
