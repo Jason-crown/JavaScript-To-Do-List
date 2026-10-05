@@ -3,6 +3,9 @@ const taskDate = document.getElementById("taskDate");
 const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
 const sortSelect = document.getElementById("sortSelect");
+const yearInput = document.getElementById("yearInput");
+const monthInput = document.getElementById("monthInput");
+const dayInput = document.getElementById("dayInput");
 
 const tasks = [];
 
@@ -80,6 +83,27 @@ taskInput.addEventListener("keydown", function(event) {
 });
 
 taskDate.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        addTask();
+    }
+});
+
+yearInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        monthInput.focus();
+    }
+});
+
+monthInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        dayInput.focus();
+    }
+});
+
+dayInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         event.preventDefault();
         addTask();
